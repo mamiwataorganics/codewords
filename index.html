@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code Words - Mami Wata Organics</title>
+<meta name="description" content="Look up any angel number and decode what it carries. The numbers that keep finding you, explained.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a0a0b;
+    --bg-deep-2:#121214;
+    --bg-card:#0d0d0f;
+    --ink:#f1ebdd;
+    --ink-soft:#b7ad95;
+    --ink-faint:#6c6657;
+    --gold:#caa85f;
+    --gold-bright:#e9d8a6;
+    --gold-deep:#8f6f33;
+    --parchment:#f5f0e6;
+    --parch-ink:#1b1915;
+    --parch-soft:#5a5142;
+    --line:rgba(202,168,95,0.28);
+    --line-faint:rgba(202,168,95,0.14);
+    --line-parch:rgba(120,92,40,0.30);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg-deep)}
+  body{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    color:var(--ink);
+    line-height:1.5;
+    padding:18px 16px 40px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(202,168,95,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, #0d0d0f 0%, #0a0a0b 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      radial-gradient(1px 1px at 14% 22%, rgba(255,255,255,0.5) 50%, transparent 100%),
+      radial-gradient(1px 1px at 78% 14%, rgba(255,255,255,0.4) 50%, transparent 100%),
+      radial-gradient(1px 1px at 33% 67%, rgba(255,255,255,0.5) 50%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(255,255,255,0.35) 50%, transparent 100%),
+      radial-gradient(1px 1px at 55% 36%, rgba(255,255,255,0.45) 50%, transparent 100%),
+      radial-gradient(1px 1px at 5% 88%, rgba(255,255,255,0.4) 50%, transparent 100%),
+      radial-gradient(1px 1px at 95% 45%, rgba(255,255,255,0.4) 50%, transparent 100%),
+      radial-gradient(1px 1px at 42% 8%, rgba(255,255,255,0.3) 50%, transparent 100%),
+      radial-gradient(1px 1px at 67% 92%, rgba(255,255,255,0.45) 50%, transparent 100%);
+  }
+  .container{max-width:640px;margin:0 auto;position:relative;z-index:1}
+
+  /* ---- masthead ---- */
+  .masthead{text-align:center;margin-bottom:22px}
+  .hero-img{display:block;width:100%;height:auto;cursor:pointer;border:1px solid rgba(241,235,221,0.12)}
+  .hero-fallback{display:none}
+  .masthead .ornament{color:var(--gold);letter-spacing:.4em;font-size:14px;margin-bottom:10px;opacity:.45}
+  .masthead h1{
+    font-family:'Cinzel',serif;font-weight:500;
+    font-size:clamp(26px,7vw,42px);letter-spacing:.18em;
+    color:var(--ink);line-height:1.1;
+  }
+  .masthead .tagline{
+    font-style:italic;color:var(--ink-soft);
+    font-size:16px;letter-spacing:.03em;margin-top:8px;
+  }
+
+  /* ---- input card ---- */
+  .form-card{
+    background:linear-gradient(180deg, rgba(22,22,24,0.85) 0%, rgba(10,10,11,0.85) 100%);
+    border:1px solid var(--line);
+    padding:24px 20px 22px;
+    position:relative;
+    box-shadow:0 20px 60px -22px rgba(0,0,0,0.7), inset 0 1px 0 rgba(212,182,117,0.08);
+  }
+  .form-card::before,.form-card::after{
+    content:'\2756';position:absolute;color:var(--gold);font-size:11px;opacity:.6;
+  }
+  .form-card::before{top:8px;left:12px}
+  .form-card::after{bottom:8px;right:12px}
+  .form-card label{
+    display:block;font-family:'Cinzel',serif;font-size:10px;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);
+    margin-bottom:10px;font-weight:500;text-align:center;
+  }
+  .field{display:flex;gap:10px}
+  .field input{
+    flex:1;min-width:0;padding:14px 16px;font-size:20px;
+    background:#fff;color:#1a1a1a;border:1px solid var(--line);
+    font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.12em;
+    -webkit-text-fill-color:#1a1a1a;
+  }
+  .field input::placeholder{color:#999;font-style:italic;letter-spacing:0}
+  .field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,182,117,0.12)}
+  .reveal{
+    border:1px solid rgba(255,255,255,0.9);background:#fff;color:#1a1a1a;
+    font-family:'Cinzel',serif;font-weight:500;letter-spacing:.2em;
+    text-transform:uppercase;font-size:12px;padding:0 20px;cursor:pointer;
+    transition:transform .15s,background .15s;
+  }
+  .reveal:hover{background:#f4ecd8;transform:translateY(-1px)}
+  .reveal:active{transform:translateY(0)}
+  .reveal:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+  .chip{
+    background:rgba(241,235,221,0.05);border:1px solid rgba(241,235,221,0.2);
+    color:var(--ink);font-family:'Cormorant Garamond',serif;
+    font-size:15px;letter-spacing:.1em;padding:5px 13px;cursor:pointer;
+    transition:background .15s;
+  }
+  .chip:hover{background:rgba(241,235,221,0.12)}
+  .chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  .error{color:#d98b6f;text-align:center;font-size:15px;font-style:italic;margin-top:14px;min-height:20px}
+
+  /* ---- result: parchment scroll ---- */
+  .result{margin-top:26px;opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .result.show{opacity:1;transform:none}
+  .scroll{
+    background:linear-gradient(170deg, var(--parchment) 0%, #ece5d6 100%);
+    color:var(--parch-ink);
+    border:1px solid var(--gold-deep);
+    padding:30px 24px 26px;
+    position:relative;
+    box-shadow:0 24px 70px -26px rgba(0,0,0,0.75);
+  }
+  .scroll::before,.scroll::after{
+    content:'\2756';position:absolute;color:var(--gold-deep);font-size:11px;opacity:.7;
+  }
+  .scroll::before{top:10px;left:14px}
+  .scroll::after{bottom:10px;right:14px}
+
+  .sigil{text-align:center}
+  .sigil .num{
+    font-family:'Cinzel',serif;font-weight:600;
+    font-size:clamp(48px,15vw,86px);letter-spacing:.06em;
+    color:var(--parch-ink);line-height:1;
+  }
+  .root-line{
+    text-align:center;font-family:'Cinzel',serif;font-size:11px;
+    letter-spacing:.18em;color:var(--parch-soft);margin:14px 0 2px;
+  }
+  .rule{height:1px;background:var(--line-parch);max-width:120px;margin:14px auto}
+  .headline{
+    font-style:italic;font-size:clamp(19px,5vw,25px);
+    text-align:center;color:var(--parch-ink);margin:4px auto 22px;max-width:480px;line-height:1.35;
+  }
+
+  .block{border-top:1px solid var(--line-parch);padding-top:18px;margin-top:18px}
+  .block:first-of-type{border-top:none;padding-top:0;margin-top:0}
+  .block .tag{
+    font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.24em;
+    font-size:10px;color:var(--parch-soft);margin-bottom:8px;
+    display:flex;align-items:center;gap:10px;justify-content:center;
+  }
+  .block .tag .key{
+    font-family:'Cinzel',serif;background:rgba(27,25,21,0.07);
+    padding:2px 9px;color:var(--parch-soft);letter-spacing:.08em;
+  }
+  .block .name{font-family:'Cinzel',serif;font-size:15px;letter-spacing:.06em;color:var(--parch-ink);text-align:center;margin-bottom:8px;font-weight:500}
+  .block p{font-size:16.5px;color:#3f3626;text-align:center;line-height:1.55}
+
+  .digit-row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid rgba(120,92,40,0.16)}
+  .digit-row:first-of-type{border-top:none;padding-top:2px}
+  .glyph{
+    flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel',serif;font-weight:600;font-size:20px;color:var(--parchment);
+    background:#221f1a;
+  }
+  .digit-row .body{text-align:left}
+  .digit-row .body .name{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.05em;text-align:left;margin-bottom:2px}
+  .digit-row .body .amp{font-family:'Cinzel',serif;color:var(--parch-soft);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+  .digit-row .body p{font-size:15.5px;color:#43392a;text-align:left;margin-top:4px;line-height:1.5}
+
+  .close{
+    text-align:center;font-style:italic;font-size:19px;color:var(--parch-soft);
+    padding:22px 8px 2px;line-height:1.5;border-top:1px solid var(--line-parch);margin-top:18px;
+  }
+
+  .life-row{padding:13px 0;border-top:1px solid rgba(120,92,40,0.16)}
+  .life-row:first-of-type{border-top:none;padding-top:2px}
+  .life-row .area{
+    font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--parch-soft);margin-bottom:4px;
+  }
+  .life-row p{font-size:16px;color:#3a3225;line-height:1.5;text-align:left}
+
+  .affirm{text-align:center;border-top:1px solid var(--line-parch);margin-top:18px;padding-top:22px}
+  .affirm .area{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--parch-soft);margin-bottom:10px}
+  .affirm p{font-style:italic;font-size:clamp(20px,5.2vw,26px);color:var(--parch-ink);line-height:1.4;max-width:460px;margin:0 auto}
+
+  /* ---- about / context ---- */
+  .about{margin-top:26px;text-align:center;padding:0 6px}
+  .about-eyebrow{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+  .about p{font-size:17px;color:var(--ink-soft);line-height:1.6;max-width:520px;margin:0 auto 12px}
+  .about .about-more{font-style:italic;color:var(--ink-faint);font-size:16px}
+  .about a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(202,168,95,0.4)}
+
+  /* ---- from the blog ---- */
+  .posts{margin-top:34px}
+  .posts-head{text-align:center;margin-bottom:18px}
+  .posts-eyebrow{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+  .posts-head p{font-style:italic;color:var(--ink-faint);font-size:16px;max-width:420px;margin:0 auto}
+  .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:560px){.post-grid{grid-template-columns:1fr}}
+  .post{
+    display:block;text-decoration:none;
+    background:linear-gradient(180deg, rgba(22,22,24,0.7), rgba(10,10,11,0.7));
+    border:1px solid var(--line-faint);padding:0 0 16px;
+    transition:border-color .2s,transform .15s;
+  }
+  .post:hover{border-color:var(--line);transform:translateY(-2px)}
+  .post-img{display:block;width:100%;height:150px;object-fit:cover;margin-bottom:12px}
+  .post-cat{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 14px 6px}
+  .post-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);line-height:1.25;margin:0 14px 8px}
+  .post-date{font-style:italic;color:var(--ink-faint);font-size:13px;margin:0 14px}
+  .posts-all{display:block;text-align:center;margin-top:18px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+  .posts-all:hover{color:var(--ink)}
+
+  /* ---- book block ---- */
+  .scallop{display:block;margin:0 auto 14px;color:var(--gold);opacity:.4}
+  .book{
+    margin-top:30px;
+    background:linear-gradient(180deg, rgba(22,22,24,0.7), rgba(10,10,11,0.7));
+    border:1px solid var(--line);
+    padding:26px 22px;text-align:center;position:relative;
+  }
+  .book .eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .book .cover{
+    /* BOOK COVER GOES HERE: paste your cover image URL into src below. */
+    display:block;max-width:150px;width:42%;margin:0 auto 16px;
+    border:1px solid var(--line);box-shadow:0 16px 40px -16px rgba(0,0,0,0.8);
+  }
+  .book h2{font-family:'Cinzel',serif;font-weight:500;font-size:20px;letter-spacing:.08em;color:var(--ink);line-height:1.2;margin-bottom:10px}
+  .book p{font-style:italic;color:var(--ink-soft);font-size:17px;max-width:440px;margin:0 auto 18px;line-height:1.5}
+  .book a.buy{
+    display:inline-block;background:#fff;color:#1a1a1a;
+    font-family:'Cinzel',serif;font-size:12px;font-weight:500;letter-spacing:.2em;
+    text-transform:uppercase;text-decoration:none;padding:14px 28px;
+    transition:transform .15s,background .15s;
+  }
+  .book a.buy:hover{background:#f4ecd8;transform:translateY(-1px)}
+
+  footer{text-align:center;margin-top:28px;color:var(--ink-faint);font-size:13px;letter-spacing:.04em;font-style:italic}
+  footer a{color:var(--gold);text-decoration:none}
+
+  @media (prefers-reduced-motion:reduce){.result{transition:none}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER GRAPHIC: paste your banner image URL into the src below (delete the word REPLACE).
+       Tip: Shopify admin > Content > Files > Upload > tap the link icon to copy the URL. -->
+  <header class="masthead">
+    <img class="hero-img" id="heroImg" src="REPLACE_WITH_HEADER_IMAGE_URL" alt="Code Words - Angel Numbers, Affirmations, Alignment"
+         onclick="document.getElementById('numInput').focus();document.getElementById('numInput').scrollIntoView({behavior:'smooth',block:'center'});"
+         onerror="this.style.display='none';document.getElementById('heroText').style.display='block'">
+    <div id="heroText" class="hero-fallback">
+      <div class="ornament">&#10070; &#10086; &#10070;</div>
+      <!-- EDIT THIS: shows only if the graphic above is missing. -->
+      <h1>Code Words</h1>
+      <p class="tagline">Angel numbers, decoded. The sequences that keep finding you.</p>
+    </div>
+  </header>
+
+  <div class="form-card">
+    <label>Enter the number you keep seeing</label>
+    <div class="field">
+      <input id="numInput" inputmode="numeric" autocomplete="off" placeholder="e.g. 1044" aria-label="Enter a number">
+      <button class="reveal" id="revealBtn">Reveal</button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="error" id="error" role="alert"></div>
+  </div>
+
+  <div class="result" id="result" aria-live="polite"></div>
+
+  <!-- WHAT IS THIS / context block -->
+  <div class="about">
+    <div class="about-eyebrow">What are angel numbers?</div>
+    <!-- EDIT THIS: explain it in your own voice. Words between > and < only. -->
+    <p>Angel numbers are repeating or patterned sequences - 111, 717, 1044 - that keep showing up on clocks, receipts, and license plates until you finally notice. Many believe they are messages: a nudge from your guides, the universe, your own higher self. Type whatever number keeps finding you above, and Code Words decodes what it carries for your love, your work, your money, and your spirit - plus an affirmation to carry with you.</p>
+    <p class="about-more">This is one room in the <a href="https://www.mamiwataorganics.com/blogs/news" target="_blank" rel="noopener">Healthy Wealthy Witch</a> world. There is more waiting for you there - affirmations, rituals, and the rest of the practice.</p>
+  </div>
+
+  <!-- BOOK BLOCK -->
+  <div class="book">
+    <svg class="scallop" width="52" height="30" viewBox="0 0 52 30" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.1">
+      <path d="M26 27 L6 13"/><path d="M26 27 L11 9"/><path d="M26 27 L18 6"/>
+      <path d="M26 27 L26 5"/><path d="M26 27 L34 6"/><path d="M26 27 L41 9"/><path d="M26 27 L46 13"/>
+      <path d="M6 13 Q26 0 46 13"/>
+    </svg>
+    <div class="eyebrow">From the author</div>
+    <!-- To add the cover: paste your image URL into the src below and delete the word REPLACE. -->
+    <img class="cover" src="REPLACE_WITH_COVER_IMAGE_URL" alt="Manifest 22 Transit Guidebook" onerror="this.style.display='none'">
+    <!-- EDIT THIS: book title and pitch. Change only the words between > and < . Keep quotes straight. -->
+    <h2>Manifest 22<br>Transit Guidebook</h2>
+    <p>Angel numbers are one language the universe uses. The transit guidebook is the other: 299 pages decoding every major movement of the year, so you always know what the sky is saying and how to move with it. If the signs keep finding you, this is the map.</p>
+    <a class="buy" href="https://www.mamiwataorganics.com/products/the-manifest22-transit-e-guidebook-instant-download-after-5-22" target="_blank" rel="noopener">Get the guidebook</a>
+  </div>
+
+  <!-- FROM THE BLOG: three featured posts. For each card, paste the post's image URL,
+       category, title, date, and link between the > and < marks. Swap them anytime. -->
+  <div class="posts">
+    <div class="posts-head">
+      <div class="posts-eyebrow">From the blog</div>
+      <p>More Code Words, affirmations, and ritual on the Healthy Wealthy Witch.</p>
+    </div>
+
+    <div class="post-grid">
+
+      <a class="post" href="REPLACE_WITH_POST_1_LINK" target="_blank" rel="noopener">
+        <img class="post-img" src="REPLACE_WITH_POST_1_IMAGE_URL" alt="" onerror="this.style.display='none'">
+        <div class="post-cat">Code Words</div>
+        <div class="post-title">Replace with post 1 title</div>
+        <div class="post-date">Month 00, 2026</div>
+      </a>
+
+      <a class="post" href="REPLACE_WITH_POST_2_LINK" target="_blank" rel="noopener">
+        <img class="post-img" src="REPLACE_WITH_POST_2_IMAGE_URL" alt="" onerror="this.style.display='none'">
+        <div class="post-cat">Code Words</div>
+        <div class="post-title">Replace with post 2 title</div>
+        <div class="post-date">Month 00, 2026</div>
+      </a>
+
+      <a class="post" href="REPLACE_WITH_POST_3_LINK" target="_blank" rel="noopener">
+        <img class="post-img" src="REPLACE_WITH_POST_3_IMAGE_URL" alt="" onerror="this.style.display='none'">
+        <div class="post-cat">Code Words</div>
+        <div class="post-title">Replace with post 3 title</div>
+        <div class="post-date">Month 00, 2026</div>
+      </a>
+
+    </div>
+
+    <a class="posts-all" href="https://www.mamiwataorganics.com/blogs/news" target="_blank" rel="noopener">Read the blog &#8594;</a>
+  </div>
+
+  <footer>
+    A Mami Wata Organics ritual tool &middot; <a href="https://mamiwataorganics.com">mamiwataorganics.com</a>
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+/* ----------------------------------------------------------
+   DEFINITIONS DATASET  (edit these to change every reading)
+---------------------------------------------------------- */
+var DIGITS = {
+  "0": { name:"Source, The Infinite", text:"Wholeness and the God-force. Zero is the start of a spiritual journey and a circle with no end. Beside other numbers it magnifies them. You are held by something larger than the situation." },
+  "1": { name:"New Beginnings", text:"Fresh starts, leadership, and manifestation. Your thoughts are seeding what comes next, so mind what you keep telling yourself. Step forward first and the path forms." },
+  "2": { name:"Faith and Union", text:"Balance, partnership, and trust in the timing. Two forces are being brought into harmony. Keep the faith even when nothing visible has shifted yet." },
+  "3": { name:"Expression and Guides", text:"Creativity, joy, and the presence of guides and ascended masters. You are being nudged to speak, make, and grow out loud rather than wait." },
+  "4": { name:"Foundation and Angels", text:"Stability, discipline, and the steady presence of the angels. Build something that lasts. The unglamorous work is the work right now." },
+  "5": { name:"Change and Freedom", text:"A shift is moving toward you. Choices, motion, and release of control. Let life rearrange itself instead of gripping the old shape." },
+  "6": { name:"Home and Heart", text:"Love, family, the body, and the nest. Tend what nurtures you and balance how much you give with how much you receive." },
+  "7": { name:"The Mystic", text:"Spiritual awakening, intuition, and hidden knowing. This is a sign you are on the right path. Go inward, the answer is already in you." },
+  "8": { name:"Abundance and Power", text:"Flow of money, karma, authority, and infinity. You are aligning to receive and to lead. What you put out is circling back." },
+  "9": { name:"Completion and Service", text:"A cycle is closing. Release, lightwork, and humanitarian purpose. Make room. What is ending is clearing space for what is meant." }
+};
+
+var MASTERS = {
+  "11":{ name:"11 - The Awakener", text:"A portal of intuition and spiritual insight. Your sensitivity is the gift, not the flaw. Pay attention to the thought you had the moment you saw this." },
+  "22":{ name:"22 - The Master Builder", text:"Dreams made tangible at scale. This is the bridge between a vision and the material world. Build big and build real." },
+  "33":{ name:"33 - The Healer-Teacher", text:"Compassion, healing, and devotion. Love expressed as service to others. Your care is being asked to go wider than yourself." }
+};
+
+var ROOT_CLOSE = {
+  "0":"Begin from wholeness. You are held.",
+  "1":"You are at a true beginning. Plant the intention now.",
+  "2":"Trust the unfolding. Your faith is the work.",
+  "3":"Create. Your expression is the message.",
+  "4":"Build steady. The foundation is being laid under you.",
+  "5":"Let the change move you. Freedom is on the other side.",
+  "6":"Come home to yourself. Love is the throughline.",
+  "7":"Go inward. You already know.",
+  "8":"You are aligned to receive. Stay open.",
+  "9":"Release what is complete. The new cannot enter a full hand.",
+  "11":"Listen closely. The veil is thin for you right now.",
+  "22":"Dream it real. You are built to build.",
+  "33":"Let your love be of service. That is the assignment."
+};
+
+var AFFIRM = {
+  "0":"I am whole. I am held by something greater than this moment.",
+  "1":"I am the beginning. What I start, I am ready to see through.",
+  "2":"I am held by perfect timing. I trust what is coming together for me.",
+  "3":"I am a clear channel for joy and creation. My voice matters.",
+  "4":"I am building something that lasts. I am steady, and I am supported.",
+  "5":"I am free. I move with change instead of against it.",
+  "6":"I am worthy of the love I give, and safe to receive it.",
+  "7":"I trust my inner knowing. I am exactly where I am meant to be.",
+  "8":"I am aligned with abundance. I am powerful, and I lead with integrity.",
+  "9":"I release what is complete. I make room for what is meant for me.",
+  "11":"I trust my intuition. I am awake to the signs guiding me.",
+  "22":"I am a builder of real things. My vision becomes form.",
+  "33":"I lead with love. My care is a gift to the world."
+};
+
+/* Life-area guidance, keyed by the number's root (or master number).
+   This is what makes each reading personal: what it means for love, work, money, spirit. */
+var LIFE = {
+  "0": { love:"A spiritual reset in matters of the heart. Begin from wholeness, not from lack.", work:"A blank page. Source is asking what you truly want to build before you build it.", money:"Return to trust. Abundance starts as faith before it becomes form.", spirit:"A direct line to Source. You are being held and reset. Listen." },
+  "1": { love:"A clean slate in love. If you are single, someone may be approaching or you are being cleared to make room for them; if you are partnered, this is a chance to begin the relationship again with more honesty than before. Lead, name what you actually want, and stop waiting to be chosen. The first move is yours to make.", work:"A new venture, role, or direction is opening, and you are meant to start it rather than wait for the perfect moment. Trust the idea that keeps circling back to you. Permission is not coming from outside; it was always yours to give yourself.", money:"Income tied to your own initiative is favored now: a new stream, a raised rate, a bold ask, or the project you finally launch. Money follows the person who moves first here, so back yourself before you feel ready.", spirit:"You are being reborn into a more independent, self-trusting version of yourself, and the old identity is falling away on purpose. Honor the urge to begin again even if no one around you understands it yet." },
+  "2": { love:"Partnership and patience are the themes. A relationship is finding its balance, or a meaningful connection is being arranged for you behind the scenes before you can see it. Do not force the timing or chase; the softest, most settled version of you is the most magnetic right now.", work:"This is a season of collaboration over solo grinding. The right ally, partner, or agreement is on its way, and your work is to keep the faith through the stretch where nothing looks like it is moving. Tend the relationships, because they are the work.", money:"Money moves through cooperation, agreements, and patience rather than sudden leaps. Steady and shared beats fast and alone here. Trust that what is being arranged for you is worth the wait it is asking of you.", spirit:"You are being taught to trust divine timing and release the need to control how things arrive. Faith is not passive in this season; it is the actual assignment. Keep believing in the part you cannot yet see." },
+  "3": { love:"Joy, playfulness, and honest communication are being asked of you. Say the thing. Express the feeling out loud. Your guides are actively encouraging connection and lightness, so let love feel fun again instead of heavy and overthought.", work:"Creative work and visible self-expression are strongly favored. Share your voice before it feels ready, publish the thing, speak up in the room. Your expression is the doorway, and the only real risk is hiding it.", money:"Abundance comes through your creativity, your visibility, and your gifts being seen. The more authentically you show up, the more the money follows. Your self-expression is an income stream, not just a hobby.", spirit:"Your guides and the ascended masters are unusually close right now, and creating, speaking, and making are how you feel them. Treat the joy itself as the message; it is pointing you home." },
+  "4": { love:"Build something stable and real. Loyalty, consistency, and showing up the same way tomorrow as today matter more than intensity or grand gestures in this season. Secure love is being constructed quietly, one brick at a time.", work:"Do the steady, structured, unglamorous work. The systems and foundations you lay now are the ones that hold for years. This is not the flashy chapter; it is the chapter that makes the flashy ones possible later.", money:"Discipline, planning, and honest budgeting pay off. Slow and secure is favored far over fast wins or gambles right now. Treat your money like a foundation you are pouring, because that is exactly what it is.", spirit:"The angels are present and actively guarding your foundation. When the work feels heavy or lonely, that unseen support is the thing holding it all up. You are not doing this alone, even when it feels like it." },
+  "5": { love:"A genuine shift in a relationship, or freedom from one that had started to confine you. The change here is healthy, not a punishment. Let love breathe; clutching it shut is the thing that would actually lose it.", work:"A pivot, an unexpected opportunity, or release from a role you had outgrown. The movement is the point. Stay flexible and curious instead of bracing for impact; this change is clearing space for something truer.", money:"Money is in motion, so expect things to shift rather than sit still, and do not over-rely on a single source right now. Flexibility is your protection, and the change you are resisting may be the upgrade in disguise.", spirit:"You are being freed from an old structure, identity, or fear. Release control and let life rearrange you; you cannot steer and surrender at the same time. Trust the rearrangement." },
+  "6": { love:"Love, family, and home move to the center. This is a time to nurture the relationship and the nest, repair what has been neglected, and let yourself be cared for too, not only be the one who gives. Tenderness is the whole assignment.", work:"Work that serves, heals, or nurtures others is favored, as is bringing more heart into whatever you already do. Watch the balance, though, between how much you pour out and how much you actually let yourself receive.", money:"Money tied to home, family, and care comes into focus, whether that is a home expense, supporting loved ones, or building security for the people you love. Tend your resources from steadiness and love, not from fear or scarcity.", spirit:"You are being called back to love and to your own care. Your body, your home, and your peace are sacred ground, not afterthoughts. Refill yourself first; you cannot pour from a cup you keep ignoring." },
+  "7": { love:"Go deeper than the surface. This points to a soul-level connection, or a meaningful season of solitude that is quietly making you stronger. Trust your read on who is genuine; your intuition about people is especially sharp right now.", work:"Inner work, study, research, and mastery matter more than visible hustle. Your depth and wisdom are the real asset, not the number of hours you log. Trust the path even when it looks quiet from the outside.", money:"Abundance follows alignment here, not grinding or force. When your work matches your truth, the support shows up. Stop trying to muscle it and trust that the right path provides for you.", spirit:"A real spiritual awakening is underway, and this is a clear confirmation that you are on the right path. Go inward. The answers you keep searching for on the outside have been waiting in you the whole time." },
+  "8": { love:"Power is evening out toward a relationship of equals, and old karma in love is settling its accounts. Step into your worth instead of shrinking to keep the peace; the right connection can hold your fullness without flinching.", work:"Authority, leadership, and reward for past effort are arriving. This is a season to step into your power rather than apologize for it. What you built quietly is finally ready to be recognized.", money:"Strong money flow and material mastery are highlighted, and you are aligned to receive. The work now is to steward it wisely and keep your integrity as it grows. Abundance is circling back to you.", spirit:"You are learning that power and spirit are not opposites; you can be wealthy, powerful, and deeply aligned at the same time. Lead with integrity and the abundance stays clean. Own it without guilt." },
+  "9": { love:"A chapter in love is closing so a truer one can begin. Release what is already complete with grace instead of dragging it forward. What is leaving is making room for something that actually fits the person you have become.", work:"A cycle is ending, and a stronger pull toward purpose, service, or meaning is rising in its place. Let go of what is finished even if it was once good. Completion is not failure here; it is graduation.", money:"Old debts, patterns, and money stories are clearing so new abundance has room to enter. Generosity offered now tends to circle back multiplied. Close the old accounts, both literally and energetically.", spirit:"You are a lightworker finishing a lesson and stepping toward a larger purpose. Release, forgive, and serve. What you complete now frees you for the work your soul actually came here to do." },
+  "11":{ love:"A soulmate or twin-flame frequency, marked by deep, intuitive, almost uncanny connection. Trust what you sense before it is proven on paper. Your sensitivity is reading the truth of the bond accurately.", work:"Visionary, inspired work that uplifts or awakens others is yours to do. Your intuition is the guidance system, and the ideas that feel almost too big are the assignment. Do not dim the vision to make it comfortable.", money:"Abundance arrives through intuition and inspired action more than through logic or spreadsheets alone. When a move feels lit up from the inside, that is your signal. Follow the inspired hit.", spirit:"This is a spiritual awakening portal and you are standing right inside it. Pay very close attention to your thoughts, your dreams, and the signs around you; they are answers, not coincidences. You are being activated." },
+  "22":{ love:"Building a lasting partnership with real, durable foundations. This is love made tangible, not only felt. You are capable of constructing a relationship that holds real weight, so build it on purpose.", work:"Master-builder energy: big visions becoming real, physical structures in the world. Think larger than feels reasonable, then build it methodically. You are here to turn the dream into something other people can stand inside.", money:"Large-scale abundance through disciplined vision is available to you. You can build genuine, lasting wealth rather than a quick win when you pair the big dream with steady execution. Think in legacies.", spirit:"You came to make the spiritual practical, to bring heaven into form. Manifest something real out of the vision instead of only contemplating it. Your gift is building the bridge between dream and matter." },
+  "33":{ love:"Love expressed as healing, service, and devotion. Your relationships are meant to uplift, and the right connection grows you both. Lead with compassion, and let yourself be loved as generously as you love.", work:"Teaching, healing, and guiding others is your lane, and your work is meant to reach and uplift many. Your care scales: what you give one person, you are learning to offer the collective. Step into the larger role.", money:"Abundance flows most freely when your work genuinely serves the collective. The bigger your contribution to others, the more supported you become. Money and mission are not at odds for you.", spirit:"This is a master-teacher frequency, the highest of the master numbers. Let love be both the lesson and the gift you give the world. Your devotion is the whole point; lead with the heart and the path lights up." }
+};
+
+/* ----------------------------------------------------------
+   NUMEROLOGY ENGINE
+---------------------------------------------------------- */
+function digitSum(str){
+  var s = 0;
+  for (var i=0;i<str.length;i++){ s += parseInt(str.charAt(i),10); }
+  return s;
+}
+function reduceRoot(str){
+  var n = digitSum(str);
+  while (n > 9 && n !== 11 && n !== 22 && n !== 33){
+    n = digitSum(String(n));
+  }
+  return n;
+}
+function uniqueInOrder(arr){
+  var seen = {}, out = [];
+  for (var i=0;i<arr.length;i++){
+    if (!seen[arr[i]]){ seen[arr[i]] = true; out.push(arr[i]); }
+  }
+  return out;
+}
+function countOf(arr, val){
+  var c = 0;
+  for (var i=0;i<arr.length;i++){ if (arr[i]===val) c++; }
+  return c;
+}
+function ampLabel(count){
+  if (count === 2) return "doubled - amplified";
+  if (count === 3) return "tripled - an urgent, clear signal";
+  if (count >= 4) return "repeated - a wide-open portal";
+  return "";
+}
+function isSequential(digs){
+  if (digs.length < 3) return 0;
+  var asc = true, desc = true;
+  for (var i=1;i<digs.length;i++){
+    if (parseInt(digs[i],10) !== parseInt(digs[i-1],10)+1) asc = false;
+    if (parseInt(digs[i],10) !== parseInt(digs[i-1],10)-1) desc = false;
+  }
+  if (asc) return 1;
+  if (desc) return -1;
+  return 0;
+}
+function isMirror(digs){
+  if (digs.length < 3) return false;
+  for (var i=0,j=digs.length-1;i<j;i++,j--){
+    if (digs[i] !== digs[j]) return false;
+  }
+  return true;
+}
+function allSame(digs){
+  for (var i=1;i<digs.length;i++){ if (digs[i] !== digs[0]) return false; }
+  return true;
+}
+
+/* ----------------------------------------------------------
+   READING BUILDER
+---------------------------------------------------------- */
+function esc(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function block(tag, key, name, text){
+  return '<div class="block">'+
+           '<div class="tag">'+esc(tag)+'<span class="key">'+esc(key)+'</span></div>'+
+           '<div class="name">'+esc(name)+'</div>'+
+           '<p>'+esc(text)+'</p>'+
+         '</div>';
+}
+function buildReading(raw){
+  var str = raw.replace(/[^0-9]/g,"");
+  var errorEl = document.getElementById("error");
+  errorEl.textContent = "";
+
+  if (str.length === 0){ errorEl.textContent = "Enter a number to decode."; return null; }
+  if (str.length > 6){ errorEl.textContent = "Try a sequence of 6 digits or fewer."; return null; }
+
+  var digs = str.split("");
+  var sum = digitSum(str);
+  var root = reduceRoot(str);
+  var html = '<div class="scroll">';
+
+  html += '<div class="sigil"><div class="num">'+esc(str)+'</div></div>';
+  var sumExpr = digs.join(" + ") + " = " + sum;
+  var rootExpr = (sum === root) ? sumExpr : (sumExpr + "  to  " + root);
+  html += '<div class="root-line">'+esc(rootExpr)+'</div>';
+  html += '<div class="rule"></div>';
+
+  var headline;
+  if (allSame(digs) && digs.length >= 2){
+    headline = "A portal of pure " + DIGITS[digs[0]].name.split(",")[0].toLowerCase() + " energy.";
+  } else if (MASTERS[str]){
+    headline = MASTERS[str].name.split(" - ")[1] + " is calling you.";
+  } else {
+    var rk = MASTERS[String(root)] ? MASTERS[String(root)] : DIGITS[String(root)];
+    headline = "Carried by the root of " + root + " - " + rk.name.split(",")[0].split(" - ").slice(-1)[0].toLowerCase() + ".";
+  }
+  html += '<div class="headline">'+esc(headline)+'</div>';
+
+  if (MASTERS[str]){
+    html += block("Master Number", str, MASTERS[str].name, MASTERS[str].text);
+  }
+
+  var seq = isSequential(digs);
+  if (allSame(digs) && digs.length >= 2){
+    html += block("Pattern", "x"+digs.length, "A repeating portal",
+      "The same digit stacked is one of the loudest signs there is. Its single meaning is turned all the way up. Stop and notice what you were just thinking or doing.");
+  } else if (seq === 1){
+    html += block("Pattern", "asc", "Forward motion",
+      "Numbers climbing in order point to progress falling into place, step after step. Keep moving in the direction you have started.");
+  } else if (seq === -1){
+    html += block("Pattern", "desc", "Unwinding",
+      "Numbers stepping down signal a release - something is completing and being let go in the right order. Allow it.");
+  } else if (isMirror(digs)){
+    html += block("Pattern", "mirror", "A reflection",
+      "A mirror sequence shows your inner and outer worlds lining up. What you feel inside is starting to show outside. Alignment.");
+  }
+
+  if (!(allSame(digs) && digs.length >= 2)){
+    var uniq = uniqueInOrder(digs);
+    var rows = "";
+    for (var i=0;i<uniq.length;i++){
+      var d = uniq[i];
+      var c = countOf(digs, d);
+      var amp = c > 1 ? '<span class="amp">'+esc(ampLabel(c))+'</span>' : '';
+      rows += '<div class="digit-row">'+
+                '<div class="glyph">'+esc(d)+'</div>'+
+                '<div class="body"><div class="name">'+esc(DIGITS[d].name)+'</div>'+amp+
+                '<p>'+esc(DIGITS[d].text)+'</p></div>'+
+              '</div>';
+    }
+    html += '<div class="block"><div class="tag">The digits within</div>'+rows+'</div>';
+  }
+
+  if (!MASTERS[str]){
+    var rootDef = MASTERS[String(root)] ? MASTERS[String(root)] : DIGITS[String(root)];
+    html += block("The current beneath it", String(root),
+      (MASTERS[String(root)] ? rootDef.name : "Root " + root + " - " + rootDef.name),
+      "Reduced down, this sequence carries a "+root+". " + rootDef.text);
+  }
+
+  var closeKey = MASTERS[str] ? str : String(root);
+
+  var lifeKey = MASTERS[str] ? str : String(root);
+  var life = LIFE[lifeKey] || LIFE[String(root)];
+  if (life){
+    var lifeRows =
+      '<div class="life-row"><div class="area">In love and connection</div><p>'+esc(life.love)+'</p></div>'+
+      '<div class="life-row"><div class="area">At work and in your calling</div><p>'+esc(life.work)+'</p></div>'+
+      '<div class="life-row"><div class="area">With money and abundance</div><p>'+esc(life.money)+'</p></div>'+
+      '<div class="life-row"><div class="area">In spirit</div><p>'+esc(life.spirit)+'</p></div>';
+    html += '<div class="block"><div class="tag">What it means for you</div>'+lifeRows+'</div>';
+  }
+
+  var closeText = ROOT_CLOSE[closeKey] || ROOT_CLOSE[String(root)] || "";
+  if (closeText){ html += '<div class="close">'+esc(closeText)+'</div>'; }
+
+  var affText = AFFIRM[closeKey] || AFFIRM[String(root)] || "";
+  if (affText){
+    html += '<div class="affirm"><div class="area">Your affirmation</div><p>'+esc(affText)+'</p></div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+/* ----------------------------------------------------------
+   WIRING
+---------------------------------------------------------- */
+function run(){
+  var input = document.getElementById("numInput");
+  var html = buildReading(input.value);
+  var result = document.getElementById("result");
+  if (html === null){ result.classList.remove("show"); result.innerHTML = ""; return; }
+  result.classList.remove("show");
+  result.innerHTML = html;
+  void result.offsetWidth;
+  result.classList.add("show");
+  result.scrollIntoView({behavior:"smooth", block:"start"});
+}
+document.getElementById("revealBtn").addEventListener("click", run);
+document.getElementById("numInput").addEventListener("keydown", function(e){
+  if (e.key === "Enter"){ run(); }
+});
+var CHIP_NUMS = ["111","222","333","717","1111","1044","1114"];
+var chipWrap = document.getElementById("chips");
+for (var i=0;i<CHIP_NUMS.length;i++){
+  (function(n){
+    var b = document.createElement("button");
+    b.className = "chip";b.type = "button";b.textContent = n;
+    b.addEventListener("click", function(){
+      document.getElementById("numInput").value = n; run();
+    });
+    chipWrap.appendChild(b);
+  })(CHIP_NUMS[i]);
+}
+</script>
+</body>
+</html>
