@@ -27,7 +27,7 @@
     font-family:'Cormorant Garamond',Georgia,serif;
     color:var(--ink);
     line-height:1.5;
-    padding:14px 16px 26px;
+    padding:20px 16px 34px;
     background:
       radial-gradient(ellipse at 50% 0%, rgba(181,135,74,0.08) 0%, transparent 50%),
       radial-gradient(circle at 50% 50%, #0d0d0f 0%, #0a0a0b 100%);
@@ -47,6 +47,25 @@
       radial-gradient(1px 1px at 67% 92%, rgba(255,255,255,0.45) 50%, transparent 100%);
   }
   .container{max-width:640px;margin:0 auto;position:relative;z-index:1}
+
+  /* ---- masthead ---- */
+  .masthead{text-align:center;margin-bottom:26px;padding-top:6px}
+  .masthead .eyebrow{
+    font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+  }
+  .masthead h1{
+    font-family:'Cormorant Garamond',serif;font-weight:500;
+    font-size:clamp(40px,11vw,64px);letter-spacing:.04em;
+    color:var(--ink);line-height:1;
+  }
+  .masthead .tagline{
+    font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
+    font-size:clamp(17px,4.4vw,21px);letter-spacing:.01em;margin-top:12px;max-width:440px;margin-left:auto;margin-right:auto;
+  }
+  .masthead .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:20px}
+  .masthead .divider::before,.masthead .divider::after{content:'';width:46px;height:1px;background:var(--line)}
+  .masthead .divider span{color:var(--gold);font-size:11px;opacity:.8}
 
   /* ---- input card ---- */
   .form-card{
@@ -103,7 +122,6 @@
     position:relative;
     box-shadow:0 24px 70px -26px rgba(0,0,0,0.8), inset 0 1px 0 rgba(181,135,74,0.08);
   }
-
   .sigil{text-align:center}
   .sigil .num{
     font-family:'Cormorant Garamond',serif;font-weight:600;
@@ -119,7 +137,6 @@
     font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(20px,5vw,27px);
     text-align:center;color:var(--ink);margin:6px auto 24px;max-width:480px;line-height:1.35;
   }
-
   .block{border-top:1px solid var(--line-faint);padding-top:20px;margin-top:20px}
   .block:first-of-type{border-top:none;padding-top:0;margin-top:0}
   .block .tag{
@@ -133,7 +150,6 @@
   }
   .block .name{font-family:'Cormorant Garamond',serif;font-size:21px;letter-spacing:.02em;color:var(--ink);text-align:center;margin-bottom:8px;font-weight:500}
   .block p{font-size:17px;color:var(--ink-soft);text-align:center;line-height:1.6}
-
   .digit-row{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line-faint)}
   .digit-row:first-of-type{border-top:none;padding-top:2px}
   .glyph{
@@ -145,12 +161,10 @@
   .digit-row .body .name{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-align:left;margin-bottom:2px;font-weight:500}
   .digit-row .body .amp{font-family:'Jost',sans-serif;color:var(--gold);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
   .digit-row .body p{font-size:16px;color:var(--ink-soft);text-align:left;margin-top:5px;line-height:1.55}
-
   .close{
     text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--ink-soft);
     padding:24px 8px 2px;line-height:1.5;border-top:1px solid var(--line-faint);margin-top:20px;
   }
-
   .life-row{padding:14px 0;border-top:1px solid var(--line-faint)}
   .life-row:first-of-type{border-top:none;padding-top:2px}
   .life-row .area{
@@ -158,12 +172,61 @@
     color:var(--gold);margin-bottom:5px;
   }
   .life-row p{font-size:16.5px;color:var(--ink-soft);line-height:1.55;text-align:left}
-
   .affirm{text-align:center;border:1px solid var(--line);background:rgba(181,135,74,0.05);margin-top:22px;padding:26px 22px}
   .affirm .area{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
   .affirm p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(21px,5.2vw,27px);color:var(--ink);line-height:1.4;max-width:460px;margin:0 auto}
 
-  footer{text-align:center;margin-top:26px;color:var(--ink-faint);font-size:14px;letter-spacing:.06em;font-style:italic;font-family:'Cormorant Garamond',serif}
+  /* ---- about ---- */
+  .about{margin-top:30px;text-align:center;padding:0 6px}
+  .about-eyebrow{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .about p{font-size:17.5px;color:var(--ink-soft);line-height:1.6;max-width:520px;margin:0 auto 12px}
+  .about .about-more{font-style:italic;color:var(--ink-faint);font-size:16px}
+  .about a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(181,135,74,0.4)}
+
+  /* ---- from the blog ---- */
+  .posts{margin-top:38px}
+  .posts-head{text-align:center;margin-bottom:20px}
+  .posts-eyebrow{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .posts-head p{font-style:italic;color:var(--ink-faint);font-size:16px;max-width:420px;margin:0 auto}
+  .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:560px){.post-grid{grid-template-columns:1fr}}
+  .post{
+    display:block;text-decoration:none;
+    background:linear-gradient(180deg, rgba(20,20,22,0.8), rgba(10,10,11,0.8));
+    border:1px solid var(--line-faint);padding:0 0 16px;
+    transition:border-color .2s,transform .15s;
+  }
+  .post:hover{border-color:var(--line);transform:translateY(-2px)}
+  .post-img{display:block;width:100%;height:150px;object-fit:cover;margin-bottom:12px;background:#161616}
+  .post-cat{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:14px 14px 6px}
+  .post-title{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);line-height:1.25;margin:0 14px 8px}
+  .post-date{font-style:italic;color:var(--ink-faint);font-size:13px;margin:0 14px}
+  .posts-all{display:block;text-align:center;margin-top:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
+  .posts-all:hover{color:var(--ink)}
+
+  /* ---- book block ---- */
+  .book{
+    margin-top:34px;
+    background:linear-gradient(180deg, rgba(20,20,22,0.8), rgba(10,10,11,0.8));
+    border:1px solid var(--line);
+    padding:30px 24px;text-align:center;position:relative;
+  }
+  .book .eyebrow{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .book .cover{
+    display:block;max-width:160px;width:46%;margin:0 auto 18px;
+    border:1px solid var(--line);box-shadow:0 16px 40px -16px rgba(0,0,0,0.8);
+  }
+  .book h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;letter-spacing:.02em;color:var(--ink);line-height:1.1;margin-bottom:12px}
+  .book p{font-style:italic;color:var(--ink-soft);font-size:17px;max-width:440px;margin:0 auto 20px;line-height:1.55}
+  .book a.buy{
+    display:inline-block;background:var(--gold);color:#0a0a0a;
+    font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.2em;
+    text-transform:uppercase;text-decoration:none;padding:14px 30px;
+    transition:transform .15s,background .15s;
+  }
+  .book a.buy:hover{background:var(--gold-bright);transform:translateY(-1px)}
+
+  footer{text-align:center;margin-top:30px;color:var(--ink-faint);font-size:14px;letter-spacing:.04em;font-style:italic;font-family:'Cormorant Garamond',serif}
   footer a{color:var(--gold);text-decoration:none}
 
   @media (prefers-reduced-motion:reduce){.result{transition:none}}
@@ -175,6 +238,13 @@
 </head>
 <body>
 <div class="container">
+
+  <header class="masthead">
+    <div class="eyebrow">A Healthy Wealthy Witch Tool</div>
+    <h1>Code Words</h1>
+    <p class="tagline">Angel numbers, decoded. The sequences that keep finding you.</p>
+    <div class="divider"><span>&#10038;</span></div>
+  </header>
 
   <div class="form-card">
     <label>Enter the number you keep seeing</label>
@@ -188,8 +258,59 @@
 
   <div class="result" id="result" aria-live="polite"></div>
 
+  <div class="about">
+    <div class="about-eyebrow">What are angel numbers?</div>
+    <p>Angel numbers are repeating or patterned sequences - 111, 717, 1044 - that keep showing up on clocks, receipts, and license plates until you finally notice. Many believe they are messages: a nudge from your guides, the universe, your own higher self. Type whatever number keeps finding you above, and Code Words decodes what it carries for your love, your work, your money, and your spirit - plus an affirmation to carry with you.</p>
+    <p class="about-more">This is one room in the <a href="https://www.mamiwataorganics.com/blogs/news" target="_blank" rel="noopener">Healthy Wealthy Witch</a> world. There is more waiting for you there - affirmations, rituals, and the rest of the practice.</p>
+  </div>
+
+  <!-- BOOK BLOCK. To add the cover: paste your image URL into the src below (replace the REPLACE text). -->
+  <div class="book">
+    <div class="eyebrow">From the author</div>
+    <img class="cover" src="https://www.mamiwataorganics.com/cdn/shop/files/IMG-5402_1024x1024.png?v=1780677182" alt="Manifest 22 Transit Guidebook" onerror="this.style.display='none'">
+    <h2>Manifest 22 Transit Guidebook</h2>
+    <p>Angel numbers are one language the universe uses. The transit guidebook is the other: 299 pages decoding every major movement of the year, so you always know what the sky is saying and how to move with it. If the signs keep finding you, this is the map.</p>
+    <a class="buy" href="https://www.mamiwataorganics.com/products/the-manifest22-transit-e-guidebook-instant-download-after-5-22" target="_blank" rel="noopener">Get the guidebook</a>
+  </div>
+
+  <!-- FROM THE BLOG. Pre-filled with your Code Words posts. To add an image to any card,
+       paste its image URL in that card's src. To swap a post, change the link, title, and date. -->
+  <div class="posts">
+    <div class="posts-head">
+      <div class="posts-eyebrow">From the blog</div>
+      <p>More Code Words, affirmations, and ritual on the Healthy Wealthy Witch.</p>
+    </div>
+
+    <div class="post-grid">
+
+      <a class="post" href="https://www.mamiwataorganics.com/blogs/news/when-numbers-become-obsessions-the-difference-between-a-sign-and-a-fixation" target="_blank" rel="noopener">
+        <img class="post-img" src="https://www.mamiwataorganics.com/cdn/shop/articles/9EA9EEB4-A701-4D47-A73F-6E067767A73D_1024x1024.png?v=1781334709" alt="When Numbers Become Obsessions" onerror="this.style.display='none'">
+        <div class="post-cat">Code Words</div>
+        <div class="post-title">When Numbers Become Obsessions: The Difference Between a Sign and a Fixation</div>
+        <div class="post-date">June 13, 2026</div>
+      </a>
+
+      <a class="post" href="https://www.mamiwataorganics.com/blogs/news/how-to-decipher-angel-numbers-a-witchs-guide-to-reading-code-words" target="_blank" rel="noopener">
+        <img class="post-img" src="https://www.mamiwataorganics.com/cdn/shop/articles/D86C9F64-AFDC-4CFE-A68D-3922C042BC81_1024x1024.png?v=1781332015" alt="How to Decipher Angel Numbers" onerror="this.style.display='none'">
+        <div class="post-cat">Code Words</div>
+        <div class="post-title">How to Decipher Angel Numbers: A Witch's Guide to Reading Code Words</div>
+        <div class="post-date">June 13, 2026</div>
+      </a>
+
+      <a class="post" href="https://www.mamiwataorganics.com/blogs/news/what-are-angel-numbers-the-story-behind-manifest-22" target="_blank" rel="noopener">
+        <img class="post-img" src="https://www.mamiwataorganics.com/cdn/shop/articles/E4CF3713-ECAB-499B-92FA-DB979E400D01_1024x1024.png?v=1781331311" alt="What Are Angel Numbers" onerror="this.style.display='none'">
+        <div class="post-cat">Code Words</div>
+        <div class="post-title">What Are Angel Numbers? The Story Behind Manifest 22</div>
+        <div class="post-date">June 13, 2026</div>
+      </a>
+
+    </div>
+
+    <a class="posts-all" href="https://www.mamiwataorganics.com/blogs/news" target="_blank" rel="noopener">Read the blog &#8594;</a>
+  </div>
+
   <footer>
-    A Mami Wata Organics ritual tool
+    A Mami Wata Organics ritual tool &middot; <a href="https://mamiwataorganics.com">mamiwataorganics.com</a>
   </footer>
 </div>
 
