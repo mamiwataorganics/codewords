@@ -481,9 +481,22 @@ for (var i=0;i<CHIP_NUMS.length;i++){
 </script>
 
 <script>
-/* Auto-resize: tells the Shopify page how tall the tool is, so the embed box hugs the content. */
 (function(){
-  function cwPostHeight(){
+  function measure(){
+    var c = document.querySelector('.container');
+    return c ? Math.ceil(c.getBoundingClientRect().bottom) + 24 : document.body.scrollHeight;
+  }
+  function post(){ if (window.parent){ window.parent.postMessage({ cwHeight: measure() }, "*"); } }
+  window.addEventListener("load", post);
+  window.addEventListener("resize", post);
+  if (window.ResizeObserver){
+    var c = document.querySelector('.container');
+    if (c){ new ResizeObserver(post).observe(c); }
+  }
+  setInterval(post, 400);
+})();
+</script>
+
     var h = document.documentElement.scrollHeight || document.body.scrollHeight;
     if (window.parent){ window.parent.postMessage({ cwHeight: h }, "*"); }
   }
