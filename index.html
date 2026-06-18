@@ -10,70 +10,66 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-deep:#0a0a0b;
-    --bg-card:#0d0d0f;
-    --ink:#f1ebdd;
-    --ink-soft:#b7ad95;
-    --ink-faint:#6c6657;
+    --bg:#000000;
+    --panel:#0b0b0b;
+    --panel-2:#080808;
+    --ink:#f3efe7;
+    --ink-soft:#aaa493;
+    --ink-faint:#6a6557;
     --gold:#b5874a;
     --gold-bright:#ca9f63;
-    --gold-deep:#8a6635;
-    --line:rgba(181,135,74,0.32);
-    --line-faint:rgba(181,135,74,0.16);
+    --line:rgba(181,135,74,0.30);
+    --line-faint:rgba(181,135,74,0.15);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg-deep)}
+  html,body{background:var(--bg)}
   body{
     font-family:'Cormorant Garamond',Georgia,serif;
     color:var(--ink);
     line-height:1.5;
-    padding:20px 16px 34px;
-    background:
-      radial-gradient(ellipse at 50% 0%, rgba(181,135,74,0.08) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, #0d0d0f 0%, #0a0a0b 100%);
-    background-attachment:fixed;
+    padding:24px 16px 28px;
+    background:#000;
   }
   body::before{
     content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
     background-image:
-      radial-gradient(1px 1px at 14% 22%, rgba(255,255,255,0.5) 50%, transparent 100%),
-      radial-gradient(1px 1px at 78% 14%, rgba(255,255,255,0.4) 50%, transparent 100%),
-      radial-gradient(1px 1px at 33% 67%, rgba(255,255,255,0.5) 50%, transparent 100%),
-      radial-gradient(1px 1px at 88% 80%, rgba(255,255,255,0.35) 50%, transparent 100%),
-      radial-gradient(1px 1px at 55% 36%, rgba(255,255,255,0.45) 50%, transparent 100%),
-      radial-gradient(1px 1px at 5% 88%, rgba(255,255,255,0.4) 50%, transparent 100%),
-      radial-gradient(1px 1px at 95% 45%, rgba(255,255,255,0.4) 50%, transparent 100%),
-      radial-gradient(1px 1px at 42% 8%, rgba(255,255,255,0.3) 50%, transparent 100%),
-      radial-gradient(1px 1px at 67% 92%, rgba(255,255,255,0.45) 50%, transparent 100%);
+      radial-gradient(1px 1px at 14% 22%, rgba(255,255,255,0.32) 50%, transparent 100%),
+      radial-gradient(1px 1px at 78% 14%, rgba(255,255,255,0.26) 50%, transparent 100%),
+      radial-gradient(1px 1px at 33% 67%, rgba(255,255,255,0.30) 50%, transparent 100%),
+      radial-gradient(1px 1px at 88% 80%, rgba(255,255,255,0.22) 50%, transparent 100%),
+      radial-gradient(1px 1px at 55% 36%, rgba(255,255,255,0.26) 50%, transparent 100%),
+      radial-gradient(1px 1px at 5% 88%, rgba(255,255,255,0.24) 50%, transparent 100%),
+      radial-gradient(1px 1px at 95% 45%, rgba(255,255,255,0.24) 50%, transparent 100%),
+      radial-gradient(1px 1px at 42% 8%, rgba(255,255,255,0.20) 50%, transparent 100%);
   }
   .container{max-width:640px;margin:0 auto;position:relative;z-index:1}
 
-  /* ---- masthead ---- */
-  .masthead{text-align:center;margin-bottom:26px;padding-top:6px}
+  /* ---- header ---- */
+  .masthead{text-align:center;margin-bottom:30px;padding-top:4px}
   .masthead .eyebrow{
-    font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.34em;
-    text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+    font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.36em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:400;
   }
   .masthead h1{
     font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:clamp(40px,11vw,64px);letter-spacing:.04em;
+    font-size:clamp(46px,12vw,74px);letter-spacing:.012em;
     color:var(--ink);line-height:1;
   }
   .masthead .tagline{
     font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-soft);
-    font-size:clamp(17px,4.4vw,21px);letter-spacing:.01em;margin-top:12px;max-width:440px;margin-left:auto;margin-right:auto;
+    font-size:clamp(17px,4.4vw,22px);letter-spacing:.01em;margin-top:14px;
+    max-width:440px;margin-left:auto;margin-right:auto;line-height:1.4;
   }
-  .masthead .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:20px}
-  .masthead .divider::before,.masthead .divider::after{content:'';width:46px;height:1px;background:var(--line)}
-  .masthead .divider span{color:var(--gold);font-size:11px;opacity:.8}
+  .masthead .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px}
+  .masthead .divider::before,.masthead .divider::after{content:'';width:50px;height:1px;background:var(--line)}
+  .masthead .divider span{color:var(--gold);font-size:11px;opacity:.85}
 
   /* ---- input card ---- */
   .form-card{
-    background:linear-gradient(180deg, rgba(20,20,22,0.9) 0%, rgba(10,10,11,0.9) 100%);
+    background:var(--panel);
     border:1px solid var(--line);
     padding:30px 24px 26px;
     position:relative;
-    box-shadow:0 20px 60px -22px rgba(0,0,0,0.7), inset 0 1px 0 rgba(181,135,74,0.08);
   }
   .form-card label{
     display:block;font-family:'Jost',sans-serif;font-size:11px;
@@ -83,14 +79,14 @@
   .field{display:flex;gap:10px;max-width:420px;margin:0 auto}
   .field input{
     flex:1;min-width:0;padding:14px 16px;font-size:26px;
-    background:transparent;color:var(--ink);border:1px solid var(--line);
+    background:#000;color:var(--ink);border:1px solid var(--line);
     font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.12em;text-align:center;
     -webkit-text-fill-color:var(--ink);
   }
-  .field input::placeholder{color:rgba(241,235,221,0.3);font-style:italic;letter-spacing:.04em}
+  .field input::placeholder{color:rgba(243,239,231,0.3);font-style:italic;letter-spacing:.04em}
   .field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(181,135,74,0.14)}
   .reveal{
-    border:0;background:var(--gold);color:#0a0a0a;
+    border:0;background:var(--gold);color:#000;
     font-family:'Jost',sans-serif;font-weight:500;letter-spacing:.2em;
     text-transform:uppercase;font-size:12px;padding:0 24px;cursor:pointer;
     transition:transform .15s,background .15s;
@@ -101,26 +97,25 @@
 
   .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
   .chip{
-    background:rgba(181,135,74,0.06);border:1px solid rgba(181,135,74,0.3);
+    background:#000;border:1px solid rgba(181,135,74,0.3);
     color:var(--ink);font-family:'Cormorant Garamond',serif;
     font-size:17px;letter-spacing:.1em;padding:5px 15px;cursor:pointer;
     transition:background .15s,border-color .15s;
   }
-  .chip:hover{background:rgba(181,135,74,0.16);border-color:var(--gold)}
+  .chip:hover{background:rgba(181,135,74,0.12);border-color:var(--gold)}
   .chip:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
   .error{color:#d98b6f;text-align:center;font-size:16px;font-style:italic;margin-top:14px;min-height:20px}
 
-  /* ---- result: dark scroll ---- */
+  /* ---- result ---- */
   .result{margin-top:24px;opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
   .result.show{opacity:1;transform:none}
   .scroll{
-    background:linear-gradient(170deg, #0c0c0e 0%, #070708 100%);
+    background:var(--panel-2);
     color:var(--ink);
     border:1px solid var(--line);
     padding:34px 26px 30px;
     position:relative;
-    box-shadow:0 24px 70px -26px rgba(0,0,0,0.8), inset 0 1px 0 rgba(181,135,74,0.08);
   }
   .sigil{text-align:center}
   .sigil .num{
@@ -172,62 +167,11 @@
     color:var(--gold);margin-bottom:5px;
   }
   .life-row p{font-size:16.5px;color:var(--ink-soft);line-height:1.55;text-align:left}
-  .affirm{text-align:center;border:1px solid var(--line);background:rgba(181,135,74,0.05);margin-top:22px;padding:26px 22px}
+  .affirm{text-align:center;border:1px solid var(--line);background:rgba(181,135,74,0.04);margin-top:22px;padding:26px 22px}
   .affirm .area{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
   .affirm p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(21px,5.2vw,27px);color:var(--ink);line-height:1.4;max-width:460px;margin:0 auto}
 
-  /* ---- about ---- */
-  .about{margin-top:30px;text-align:center;padding:0 6px}
-  .about-eyebrow{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-  .about p{font-size:17.5px;color:var(--ink-soft);line-height:1.6;max-width:520px;margin:0 auto 12px}
-  .about .about-more{font-style:italic;color:var(--ink-faint);font-size:16px}
-  .about a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(181,135,74,0.4)}
-
-  /* ---- from the blog ---- */
-  .posts{margin-top:38px}
-  .posts-head{text-align:center;margin-bottom:20px}
-  .posts-eyebrow{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-  .posts-head p{font-style:italic;color:var(--ink-faint);font-size:16px;max-width:420px;margin:0 auto}
-  .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  @media (max-width:560px){.post-grid{grid-template-columns:1fr}}
-  .post{
-    display:block;text-decoration:none;
-    background:linear-gradient(180deg, rgba(20,20,22,0.8), rgba(10,10,11,0.8));
-    border:1px solid var(--line-faint);padding:0 0 16px;
-    transition:border-color .2s,transform .15s;
-  }
-  .post:hover{border-color:var(--line);transform:translateY(-2px)}
-  .post-img{display:block;width:100%;height:150px;object-fit:cover;margin-bottom:12px;background:#161616}
-  .post-cat{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:14px 14px 6px}
-  .post-title{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);line-height:1.25;margin:0 14px 8px}
-  .post-date{font-style:italic;color:var(--ink-faint);font-size:13px;margin:0 14px}
-  .posts-all{display:block;text-align:center;margin-top:20px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none}
-  .posts-all:hover{color:var(--ink)}
-
-  /* ---- book block ---- */
-  .book{
-    margin-top:34px;
-    background:linear-gradient(180deg, rgba(20,20,22,0.8), rgba(10,10,11,0.8));
-    border:1px solid var(--line);
-    padding:30px 24px;text-align:center;position:relative;
-  }
-  .book .eyebrow{font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-  .book .cover{
-    display:block;max-width:160px;width:46%;margin:0 auto 18px;
-    border:1px solid var(--line);box-shadow:0 16px 40px -16px rgba(0,0,0,0.8);
-  }
-  .book h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:28px;letter-spacing:.02em;color:var(--ink);line-height:1.1;margin-bottom:12px}
-  .book p{font-style:italic;color:var(--ink-soft);font-size:17px;max-width:440px;margin:0 auto 20px;line-height:1.55}
-  .book a.buy{
-    display:inline-block;background:var(--gold);color:#0a0a0a;
-    font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.2em;
-    text-transform:uppercase;text-decoration:none;padding:14px 30px;
-    transition:transform .15s,background .15s;
-  }
-  .book a.buy:hover{background:var(--gold-bright);transform:translateY(-1px)}
-
-  footer{text-align:center;margin-top:30px;color:var(--ink-faint);font-size:14px;letter-spacing:.04em;font-style:italic;font-family:'Cormorant Garamond',serif}
-  footer a{color:var(--gold);text-decoration:none}
+  footer{text-align:center;margin-top:28px;color:var(--ink-faint);font-size:14px;letter-spacing:.04em;font-style:italic;font-family:'Cormorant Garamond',serif}
 
   @media (prefers-reduced-motion:reduce){.result{transition:none}}
   @media (max-width:560px){
@@ -258,59 +202,8 @@
 
   <div class="result" id="result" aria-live="polite"></div>
 
-  <div class="about">
-    <div class="about-eyebrow">What are angel numbers?</div>
-    <p>Angel numbers are repeating or patterned sequences - 111, 717, 1044 - that keep showing up on clocks, receipts, and license plates until you finally notice. Many believe they are messages: a nudge from your guides, the universe, your own higher self. Type whatever number keeps finding you above, and Code Words decodes what it carries for your love, your work, your money, and your spirit - plus an affirmation to carry with you.</p>
-    <p class="about-more">This is one room in the <a href="https://www.mamiwataorganics.com/blogs/news" target="_blank" rel="noopener">Healthy Wealthy Witch</a> world. There is more waiting for you there - affirmations, rituals, and the rest of the practice.</p>
-  </div>
-
-  <!-- BOOK BLOCK. To add the cover: paste your image URL into the src below (replace the REPLACE text). -->
-  <div class="book">
-    <div class="eyebrow">From the author</div>
-    <img class="cover" src="https://www.mamiwataorganics.com/cdn/shop/files/IMG-5402_1024x1024.png?v=1780677182" alt="Manifest 22 Transit Guidebook" onerror="this.style.display='none'">
-    <h2>Manifest 22 Transit Guidebook</h2>
-    <p>Angel numbers are one language the universe uses. The transit guidebook is the other: 299 pages decoding every major movement of the year, so you always know what the sky is saying and how to move with it. If the signs keep finding you, this is the map.</p>
-    <a class="buy" href="https://www.mamiwataorganics.com/products/the-manifest22-transit-e-guidebook-instant-download-after-5-22" target="_blank" rel="noopener">Get the guidebook</a>
-  </div>
-
-  <!-- FROM THE BLOG. Pre-filled with your Code Words posts. To add an image to any card,
-       paste its image URL in that card's src. To swap a post, change the link, title, and date. -->
-  <div class="posts">
-    <div class="posts-head">
-      <div class="posts-eyebrow">From the blog</div>
-      <p>More Code Words, affirmations, and ritual on the Healthy Wealthy Witch.</p>
-    </div>
-
-    <div class="post-grid">
-
-      <a class="post" href="https://www.mamiwataorganics.com/blogs/news/when-numbers-become-obsessions-the-difference-between-a-sign-and-a-fixation" target="_blank" rel="noopener">
-        <img class="post-img" src="https://www.mamiwataorganics.com/cdn/shop/articles/9EA9EEB4-A701-4D47-A73F-6E067767A73D_1024x1024.png?v=1781334709" alt="When Numbers Become Obsessions" onerror="this.style.display='none'">
-        <div class="post-cat">Code Words</div>
-        <div class="post-title">When Numbers Become Obsessions: The Difference Between a Sign and a Fixation</div>
-        <div class="post-date">June 13, 2026</div>
-      </a>
-
-      <a class="post" href="https://www.mamiwataorganics.com/blogs/news/how-to-decipher-angel-numbers-a-witchs-guide-to-reading-code-words" target="_blank" rel="noopener">
-        <img class="post-img" src="https://www.mamiwataorganics.com/cdn/shop/articles/D86C9F64-AFDC-4CFE-A68D-3922C042BC81_1024x1024.png?v=1781332015" alt="How to Decipher Angel Numbers" onerror="this.style.display='none'">
-        <div class="post-cat">Code Words</div>
-        <div class="post-title">How to Decipher Angel Numbers: A Witch's Guide to Reading Code Words</div>
-        <div class="post-date">June 13, 2026</div>
-      </a>
-
-      <a class="post" href="https://www.mamiwataorganics.com/blogs/news/what-are-angel-numbers-the-story-behind-manifest-22" target="_blank" rel="noopener">
-        <img class="post-img" src="https://www.mamiwataorganics.com/cdn/shop/articles/E4CF3713-ECAB-499B-92FA-DB979E400D01_1024x1024.png?v=1781331311" alt="What Are Angel Numbers" onerror="this.style.display='none'">
-        <div class="post-cat">Code Words</div>
-        <div class="post-title">What Are Angel Numbers? The Story Behind Manifest 22</div>
-        <div class="post-date">June 13, 2026</div>
-      </a>
-
-    </div>
-
-    <a class="posts-all" href="https://www.mamiwataorganics.com/blogs/news" target="_blank" rel="noopener">Read the blog &#8594;</a>
-  </div>
-
   <footer>
-    A Mami Wata Organics ritual tool &middot; <a href="https://mamiwataorganics.com">mamiwataorganics.com</a>
+    A Mami Wata Organics ritual tool
   </footer>
 </div>
 
